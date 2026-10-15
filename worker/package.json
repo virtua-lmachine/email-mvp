@@ -1,0 +1,14 @@
+{
+  "name": "email-mvp-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker que recibe la solicitud del backend y llama a la API de SendGrid",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "email-mvp-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Formulario Vue 3 que envía la solicitud al backend Spring Boot",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.0",
+    "vite": "^6.0.0"
+  }
+}

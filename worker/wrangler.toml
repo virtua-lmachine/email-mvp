@@ -1,0 +1,16 @@
+name = "email-mvp-worker"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# Variables NO secretas (visibles en el código del Worker).
+[vars]
+# Origen permitido para CORS. En producción cámbialo por la URL real del backend.
+ALLOWED_ORIGIN = "*"
+# Remitente verificado en SendGrid (Single Sender Verification o dominio autenticado).
+FROM_EMAIL = "no-reply@example.com"
+FROM_NAME = "Email MVP"
+
+# Los secretos NO se ponen aquí. Se configuran con:
+#   wrangler secret put SENDGRID_API_KEY
+#   wrangler secret put WORKER_SHARED_SECRET
+# Para desarrollo local se colocan en el archivo .dev.vars (ver .dev.vars.example).

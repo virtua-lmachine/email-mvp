@@ -1,0 +1,18 @@
+# Node / frontend / worker
+node_modules/
+dist/
+.wrangler/
+
+# Secretos y variables locales
+.dev.vars
+.env
+.env.local
+
+# Java / Maven
+target/
+
+# IDE / sistema
+.idea/
+.vscode/
+*.iml
+.DS_Store

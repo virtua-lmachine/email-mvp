@@ -1,0 +1,60 @@
+# Blueprint de Render: backend (Docker) + frontend (sitio estático).
+# Coloca este archivo en la RAÍZ del repositorio que conectes a Render.
+#
+# El Worker NO se despliega aquí: sigue en Cloudflare (`wrangler deploy`).
+# Antes de desplegar, reemplaza:
+#   - WORKER_URL            -> URL real del Worker en Cloudflare
+#   - VITE_API_URL          -> URL real de este backend en Render (tras el primer deploy)
+#   - CORS_ALLOWED_ORIGINS  -> URL real de este frontend en Render
+services:
+  # ---------------------------------------------------------------------------
+  # Backend: API REST en Spring Boot, construida con Dockerfile
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: email-mvp-backend
+    runtime: docker
+    plan: free
+    region: oregon
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    autoDeploy: true
+    envVars:
+      # URL pública del Worker desplegado (NO incluir barra final).
+      - key: WORKER_URL
+        value: https://email-mvp-worker.TU-SUBDOMINIO.workers.dev
+      # Debe ser el MISMO valor que el secreto WORKER_SHARED_SECRET del Worker.
+      # sync: false hace que Render lo pida en el panel y no lo guarde en el repo.
+      - key: WORKER_SHARED_SECRET
+        sync: false
+      # Orígenes del frontend permitidos por CORS (local + producción).
+      # Render también asigna https://email-mvp-frontend.onrender.com si no cambias el nombre.
+      - key: CORS_ALLOWED_ORIGINS
+        value: http://localhost:5173,https://email-mvp-frontend.onrender.com
+      # Ajuste de memoria para el plan gratuito.
+      - key: JAVA_OPTS
+        value: -Xmx384m
+
+  # ---------------------------------------------------------------------------
+  # Frontend: Vue + Vite compilado a estático
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: email-mvp-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    autoDeploy: true
+    envVars:
+      # Node 22 para Vite (coincide con frontend/.nvmrc).
+      - key: NODE_VERSION
+        value: "22"
+      # Se incrusta en el bundle durante el build: si cambia, hay que redeploy.
+      # Reemplaza por la URL real del backend en Render.
+      - key: VITE_API_URL
+        value: https://email-mvp-backend.onrender.com
+    # Fallback de SPA: cualquier ruta sirve index.html.
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

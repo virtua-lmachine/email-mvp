@@ -1,0 +1,5 @@
+# Copia este archivo como .dev.vars para desarrollo local.
+# .dev.vars NO se sube al repositorio (está en .gitignore).
+
+SENDGRID_API_KEY=SG.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+WORKER_SHARED_SECRET=cambia_este_secreto_por_uno_largo_y_aleatorio
