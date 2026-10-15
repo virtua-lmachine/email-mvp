@@ -7,7 +7,7 @@ compatibility_date = "2024-11-01"
 # Origen permitido para CORS. En producción cámbialo por la URL real del backend.
 ALLOWED_ORIGIN = "*"
 # Remitente verificado en SendGrid (Single Sender Verification o dominio autenticado).
-FROM_EMAIL = "no-reply@example.com"
+FROM_EMAIL = "tecnol.jorgevaron@gmail.com"
 FROM_NAME = "Email MVP"
 
 # Los secretos NO se ponen aquí. Se configuran con:

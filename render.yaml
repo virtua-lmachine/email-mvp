@@ -22,7 +22,7 @@ services:
     envVars:
       # URL pública del Worker desplegado (NO incluir barra final).
       - key: WORKER_URL
-        value: https://email-mvp-worker.TU-SUBDOMINIO.workers.dev
+        value: https://email-mvp-worker.tecnol-jorgevaron.workers.dev
       # Debe ser el MISMO valor que el secreto WORKER_SHARED_SECRET del Worker.
       # sync: false hace que Render lo pida en el panel y no lo guarde en el repo.
       - key: WORKER_SHARED_SECRET
